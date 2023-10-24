@@ -1,0 +1,5 @@
+#Python .venv folder
+./venv
+
+#Pycharm .idea folder
+./.idea
