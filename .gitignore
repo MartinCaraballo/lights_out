@@ -3,3 +3,6 @@
 
 #Pycharm .idea folder
 ./.idea
+
+#Python cache
+./Screens/__pycache__
