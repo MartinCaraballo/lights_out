@@ -17,19 +17,23 @@ def show(matriz):
 
     # Definir el tamaño de la cuadrícula.
     filas = len(matriz)
-    columnas = len(matriz[0])
+    columnas = len(matriz) 
 
     # Crear un lienzo (canvas) para mostrar las formas.
-    canvas = tk.Canvas(ventana, width=200, height=200)
+    canvas = tk.Canvas(ventana, width=1000, height=1000)
     canvas.pack()
 
     # Crear formas geométricas para representar las luces.
     shapes = [[None for _ in range(columnas)] for _ in range(filas)]
-
+    espacio_entre_formas = 5
     for row in range(filas):
         for col in range(columnas):
-            x1, y1 = col * 50, row * 50
-            x2, y2 = x1 + 50, y1 + 50
+            # x1, y1 = col * 50, row * 50
+            # x2, y2 = x1 + 50, y1 + 50
+            x1 = col * 80 + espacio_entre_formas * col
+            y1 = row * 80 + espacio_entre_formas * row
+            x2 = x1 + 80
+            y2 = y1 + 80
             shapes[row][col] = canvas.create_rectangle(x1, y1, x2, y2, fill='white')
             canvas.tag_bind(shapes[row][col], '<Button-1>', lambda event, r=row, c=col: toggle_light(r, c))
 
