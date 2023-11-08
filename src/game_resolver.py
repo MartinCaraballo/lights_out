@@ -92,27 +92,39 @@ def solve_by_gauss_method(matrix):
     :param matrix: Matrix preparada para resolver.
     :return: Matriz con la solución del sistema
     """
-    n = np.shape(matrix)[0]
-    for i in range(n - 1):
-        for k in range(i + 1, n):
-            # Realizar la eliminación hacia adelante sin pivoteo
-            if matrix[i, i] != 0:
-                # suma binaria
-                matrix[k, :] = (matrix[k, :] + matrix[i, :]) % 2
+    size = np.shape(matrix)[0]
 
-    x = np.zeros(n, dtype=int)
+    for i in range(size):
+        # Buscar una fila con un 1 en la columna i
+        pivot_row = -1
+        for j in range(i, size):
+            if matrix[j, i] == 1:
+                pivot_row = j
+                break
 
-    for i in range(n - 1, -1, -1):
-        suma = 0
-        for j in range(i + 1, n - 1):
-            # suma binaria
-            suma = (suma + matrix[i, j] * x[j]) % 2
-        b = matrix[i, n - 1]
-        # resta y suma binaria
-        x[i] = (b - suma) % 2
+        # Si no hay una fila con un 1 en la columna i, continuar con la siguiente columna
+        if pivot_row == -1:
+            continue
 
-    x = np.transpose([x])
-    return x
+        # Intercambiar filas si es necesario
+        if pivot_row != i:
+            matrix[[pivot_row, i]] = matrix[[i, pivot_row]]
+
+        # Hacer 0 las demás entradas en la columna i
+        for j in range(size):
+            if j != i and matrix[j, i] == 1:
+                matrix[j] = matrix[j] ^ matrix[i]
+
+    # # Sustitución hacia atrás
+    # x = np.zeros(size, dtype=int)
+    #
+    # for i in range(size - 1, -1, -1):
+    #     x[i] = matrix[i, -1]
+    #     for j in range(i + 1, size):
+    #         if matrix[i, j] == 1:
+    #             x[i] = x[i] ^ x[j]
+
+    return matrix[:, -1]
 
 
 def check_game_status(matrix) -> bool:
