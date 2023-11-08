@@ -1,8 +1,11 @@
 #Python .venv folder
-./venv
+venv/
 
 #Pycharm .idea folder
-./.idea
+.idea/
 
 #Python cache
 ./Screens/__pycache__
+
+#Src python cache
+./src/__pycache__/
