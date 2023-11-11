@@ -115,16 +115,16 @@ def solve_by_gauss_method(matrix):
             if j != i and matrix[j, i] == 1:
                 matrix[j] = matrix[j] ^ matrix[i]
 
-    # # Sustitución hacia atrás
-    # x = np.zeros(size, dtype=int)
-    #
-    # for i in range(size - 1, -1, -1):
-    #     x[i] = matrix[i, -1]
-    #     for j in range(i + 1, size):
-    #         if matrix[i, j] == 1:
-    #             x[i] = x[i] ^ x[j]
+    # Sustitución hacia atrás
+    x = np.zeros(size, dtype=int)
 
-    return matrix[:, -1]
+    for i in range(size - 1, -1, -1):
+        x[i] = matrix[i, -1]
+        for j in range(i + 1, size):
+            if matrix[i, j] == 1:
+                x[i] = x[i] ^ x[j]
+
+    return np.transpose([x])
 
 
 def check_game_status(matrix) -> bool:
