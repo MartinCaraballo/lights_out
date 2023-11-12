@@ -20,7 +20,7 @@ python screen.py
 
 En Linux:
 ~~~
-python3 screenpy
+python3 screen.py
 ~~~
 
 ![ejecución del programa](./images/ejemplo_ejecucion.png)
